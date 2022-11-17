@@ -7,10 +7,10 @@
 
 #include "Client.h"
 #define MY_PORT 8080
-#define SERVER_PORT 10000
-#define BUFF_SIZE 1024
+#define SERVER_PORT 80
+#define BUFF_SIZE 1024 * 4
 
-void make_request(void) {
+void make_udp_request(void) {
     printf("Try to say hello!\n");
     int sock;
     ssize_t read_status;
@@ -48,3 +48,47 @@ void make_request(void) {
     printf("Response: %s\n", buff);
     close(sock);
 };
+
+int socket_http_connect(char *host, in_port_t port) {
+    struct hostent *hp;
+    struct sockaddr_in addr;
+    int on = 1, sock;
+
+    if((hp = gethostbyname(host)) == NULL){
+        herror("gethostbyname");
+        exit(1);
+    }
+    bcopy(hp->h_addr, &addr.sin_addr, hp->h_length);
+    addr.sin_port = htons(port);
+    addr.sin_family = AF_INET;
+    sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+    setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (const char *)&on, sizeof(int));
+
+    if(sock == -1){
+        perror("setsockopt");
+        exit(1);
+    }
+
+    if(connect(sock, (struct sockaddr *)&addr, sizeof(struct sockaddr_in)) == -1){
+        perror("connect");
+        exit(1);
+
+    }
+    return sock;
+}
+
+void send_http_request(char *host, in_port_t port) {
+    int fd;
+    char buffer[BUFF_SIZE];
+    fd = socket_http_connect(host, port);
+    write(fd, "GET /\r\n", strlen("GET /\r\n")); // write(fd, char[]*, len);
+    bzero(buffer, BUFF_SIZE);
+
+    while(read(fd, buffer, BUFF_SIZE - 1) != 0){
+        fprintf(stderr, "%s", buffer);
+        bzero(buffer, BUFF_SIZE);
+    }
+
+    shutdown(fd, SHUT_RDWR);
+    close(fd);
+}
