@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		09A771DB2925481F0095FA28 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A771DA2925481F0095FA28 /* main.swift */; };
-		09A771E42925482C0095FA28 /* Client.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A771E32925482C0095FA28 /* Client.c */; };
+		09A771E42925482C0095FA28 /* udp.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A771E32925482C0095FA28 /* udp.c */; };
+		09A771EA292664700095FA28 /* http.c in Sources */ = {isa = PBXBuildFile; fileRef = 09A771E9292664700095FA28 /* http.c */; };
+		09A771EE292667320095FA28 /* NetworkRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A771ED292667320095FA28 /* NetworkRequester.swift */; };
+		09A771F2292667F90095FA28 /* TransoptProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A771F1292667F90095FA28 /* TransoptProtocolType.swift */; };
+		09A771F4292669050095FA28 /* RequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A771F3292669050095FA28 /* RequestParameters.swift */; };
+		09A771F62926694D0095FA28 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A771F52926694D0095FA28 /* HttpMethod.swift */; };
+		09A771F829266EF80095FA28 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A771F729266EF80095FA28 /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,8 +33,15 @@
 		09A771D72925481F0095FA28 /* SocketClient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SocketClient; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A771DA2925481F0095FA28 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		09A771E12925482B0095FA28 /* SocketClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocketClient-Bridging-Header.h"; sourceTree = "<group>"; };
-		09A771E22925482C0095FA28 /* Client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
-		09A771E32925482C0095FA28 /* Client.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Client.c; sourceTree = "<group>"; };
+		09A771E22925482C0095FA28 /* udp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = udp.h; sourceTree = "<group>"; };
+		09A771E32925482C0095FA28 /* udp.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = udp.c; sourceTree = "<group>"; };
+		09A771E8292664700095FA28 /* http.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
+		09A771E9292664700095FA28 /* http.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = http.c; sourceTree = "<group>"; };
+		09A771ED292667320095FA28 /* NetworkRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequester.swift; sourceTree = "<group>"; };
+		09A771F1292667F90095FA28 /* TransoptProtocolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransoptProtocolType.swift; sourceTree = "<group>"; };
+		09A771F3292669050095FA28 /* RequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestParameters.swift; sourceTree = "<group>"; };
+		09A771F52926694D0095FA28 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		09A771F729266EF80095FA28 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,12 +74,59 @@
 		09A771D92925481F0095FA28 /* SocketClient */ = {
 			isa = PBXGroup;
 			children = (
+				09A771F929266EFC0095FA28 /* Extensions */,
 				09A771DA2925481F0095FA28 /* main.swift */,
-				09A771E22925482C0095FA28 /* Client.h */,
-				09A771E32925482C0095FA28 /* Client.c */,
+				09A771EF2926678A0095FA28 /* NetworkRequester */,
+				09A771E62926630C0095FA28 /* HTTP */,
+				09A771E5292662FB0095FA28 /* UDP */,
 				09A771E12925482B0095FA28 /* SocketClient-Bridging-Header.h */,
 			);
 			path = SocketClient;
+			sourceTree = "<group>";
+		};
+		09A771E5292662FB0095FA28 /* UDP */ = {
+			isa = PBXGroup;
+			children = (
+				09A771E22925482C0095FA28 /* udp.h */,
+				09A771E32925482C0095FA28 /* udp.c */,
+			);
+			path = UDP;
+			sourceTree = "<group>";
+		};
+		09A771E62926630C0095FA28 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				09A771E8292664700095FA28 /* http.h */,
+				09A771E9292664700095FA28 /* http.c */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		09A771EF2926678A0095FA28 /* NetworkRequester */ = {
+			isa = PBXGroup;
+			children = (
+				09A771F0292667BB0095FA28 /* Models */,
+				09A771ED292667320095FA28 /* NetworkRequester.swift */,
+			);
+			path = NetworkRequester;
+			sourceTree = "<group>";
+		};
+		09A771F0292667BB0095FA28 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				09A771F1292667F90095FA28 /* TransoptProtocolType.swift */,
+				09A771F3292669050095FA28 /* RequestParameters.swift */,
+				09A771F52926694D0095FA28 /* HttpMethod.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		09A771F929266EFC0095FA28 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				09A771F729266EF80095FA28 /* String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,8 +188,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09A771E42925482C0095FA28 /* Client.c in Sources */,
+				09A771F2292667F90095FA28 /* TransoptProtocolType.swift in Sources */,
+				09A771EE292667320095FA28 /* NetworkRequester.swift in Sources */,
+				09A771F829266EF80095FA28 /* String.swift in Sources */,
+				09A771F4292669050095FA28 /* RequestParameters.swift in Sources */,
+				09A771F62926694D0095FA28 /* HttpMethod.swift in Sources */,
+				09A771E42925482C0095FA28 /* udp.c in Sources */,
 				09A771DB2925481F0095FA28 /* main.swift in Sources */,
+				09A771EA292664700095FA28 /* http.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
